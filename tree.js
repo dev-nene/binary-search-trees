@@ -43,6 +43,24 @@ class Tree {
       return this.includes(value, node.right);
     }
   }
+
+  insert(value, node = this.root) {
+    if(value === node.data) return;
+
+    if(value < node.data) {
+      if(node.left === null) {
+        node.left = new Node(value);
+        return;
+      }
+      return this.insert(value, node.left)
+    }
+    
+    if(node.right === null) {
+      node.right = new Node(value)
+      return;
+    }
+    return this.insert(value, node.right)
+  }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
