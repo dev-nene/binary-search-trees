@@ -30,6 +30,19 @@ class Tree {
     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
     this.prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
+
+  includes(value, node = this.root) {
+    if (node === null) return false;
+
+    if (node.data === value) {
+      return true;
+    }
+    if (value < node.data) {
+      return this.includes(value, node.left);
+    } else {
+      return this.includes(value, node.right);
+    }
+  }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
