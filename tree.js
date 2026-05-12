@@ -45,21 +45,50 @@ class Tree {
   }
 
   insert(value, node = this.root) {
-    if(value === node.data) return;
+    if (value === node.data) return;
 
-    if(value < node.data) {
-      if(node.left === null) {
+    if (value < node.data) {
+      if (node.left === null) {
         node.left = new Node(value);
         return;
       }
-      return this.insert(value, node.left)
+      return this.insert(value, node.left);
     }
-    
-    if(node.right === null) {
-      node.right = new Node(value)
+
+    if (node.right === null) {
+      node.right = new Node(value);
       return;
     }
-    return this.insert(value, node.right)
+    return this.insert(value, node.right);
+  }
+
+  getSuccessor(curr) {
+    curr = curr.right;
+    while (curr.left !== null) {
+      curr = curr.left;
+    }
+    return curr;
+  }
+
+  deleteItem(value, node = this.root) {
+    if (node === null) return;
+
+    if (value < node.data) {
+      node.left = this.deleteItem(value, node.left)
+    } else if (value > node.data) {
+      node.right = this.deleteItem(value, node.right)
+    } else {
+      if (node.left === null) {
+        return node.right;
+      }
+      if (node.right === null) {
+        return node.left;
+      }
+      const successorNode = this.getSuccessor(node);
+      node.data = successorNode.data;
+      node.right = this.deleteItem(successorNode.data, node.right)
+    }
+    return node;
   }
 }
 
