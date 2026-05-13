@@ -74,9 +74,9 @@ class Tree {
     if (node === null) return;
 
     if (value < node.data) {
-      node.left = this.deleteItem(value, node.left)
+      node.left = this.deleteItem(value, node.left);
     } else if (value > node.data) {
-      node.right = this.deleteItem(value, node.right)
+      node.right = this.deleteItem(value, node.right);
     } else {
       if (node.left === null) {
         return node.right;
@@ -86,9 +86,26 @@ class Tree {
       }
       const successorNode = this.getSuccessor(node);
       node.data = successorNode.data;
-      node.right = this.deleteItem(successorNode.data, node.right)
+      node.right = this.deleteItem(successorNode.data, node.right);
     }
     return node;
+  }
+
+  levelOrderForEach(callback, node = this.root) {
+    if (typeof callback !== "function") {
+      throw new Error("Error: Callback is required");
+    }
+
+    if (node === null) return;
+
+    const queue = [];
+    queue.push(node);
+    while (queue.length !== 0) {
+      const curr = queue.shift();
+      callback(curr.data);
+      if (curr.left !== null) queue.push(curr.left);
+      if (curr.right !== null) queue.push(curr.right);
+    }
   }
 }
 
