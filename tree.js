@@ -110,14 +110,26 @@ class Tree {
 
   inOrderForEach(callback, node = this.root) {
     if (typeof callback !== "function") {
-      throw new Error("Error: Callback must be a function")
+      throw new Error("Error: Callback must be a function");
     }
-    
+
     if (node === null) return;
 
     this.inOrderForEach(callback, node.left);
     callback(node.data);
     this.inOrderForEach(callback, node.right);
+  }
+
+  preOrderForEach(callback, node = this.root) {
+    if (typeof callback !== "function") {
+      throw new Error("Error: Callback must be a function");
+    }
+
+    if (node === null) return;
+
+    callback(node.data);
+    this.preOrderForEach(callback, node.left);
+    this.preOrderForEach(callback, node.right);
   }
 }
 
