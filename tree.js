@@ -164,6 +164,20 @@ class Tree {
       return this.#getHeight(node);
     }
   }
+
+  depth(value, node = this.root, count = 0) {
+    if (node === null) return undefined;
+
+    if (value < node.data) {
+      return this.depth(value, node.left, count + 1);
+    }
+    if (value > node.data) {
+      return this.depth(value, node.right, count + 1);
+    }
+    if (value === node.data) {
+      return count;
+    }
+  }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
