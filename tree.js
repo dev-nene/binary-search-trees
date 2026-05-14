@@ -143,6 +143,27 @@ class Tree {
     this.postOrderForEach(callback, node.right);
     callback(node.data);
   }
+
+  #getHeight(node) {
+    if (node === null) return -1;
+    const leftHeight = this.#getHeight(node.left);
+    const rightHeight = this.#getHeight(node.right);
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  height(value, node = this.root) {
+    if (node === null) return undefined;
+
+    if (value < node.data) {
+      return this.height(value, node.left);
+    }
+    if (value > node.data) {
+      return this.height(value, node.right);
+    }
+    if (value === node.data) {
+      return this.#getHeight(node);
+    }
+  }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);

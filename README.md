@@ -1,5 +1,3 @@
-# binary-search-trees
-
 # Binary Search Trees
 
 Balanced Binary Search Tree implementation in JavaScript built as part of The Odin Project curriculum.
