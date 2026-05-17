@@ -178,6 +178,19 @@ class Tree {
       return count;
     }
   }
+
+  isBalanced(node = this.root) {
+    if (node === null) return true;
+
+    const leftHeight = this.#getHeight(node.left);
+    const rightHeight = this.#getHeight(node.right);
+
+    const diff = Math.abs(leftHeight - rightHeight);
+
+    if (diff > 1) return false;
+
+    return this.isBalanced(node.left) && this.isBalanced(node.right);
+  }
 }
 
 const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
