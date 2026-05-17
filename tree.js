@@ -6,7 +6,7 @@ class Node {
   }
 }
 
-class Tree {
+export default class Tree {
   constructor(arr) {
     const uniq = [...new Set(arr)].sort((a, b) => a - b);
     this.root = this.#buildTree(uniq);
@@ -202,6 +202,3 @@ class Tree {
     this.root = this.#buildTree(values);
   }
 }
-
-const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-test.prettyPrint();
